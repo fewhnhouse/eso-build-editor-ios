@@ -1,0 +1,14 @@
+
+query Builds {
+    builds {
+        id
+        name
+        applicationArea
+        description
+        role
+        race
+        esoClass
+        published
+        accessRights
+    }
+}

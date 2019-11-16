@@ -1,0 +1,134 @@
+query Build($id: ID!) {
+    build(id: $id) {
+        id
+        name
+        applicationArea
+        description
+        role
+        race
+        esoClass
+        published
+        accessRights
+        newBarOne {
+            id
+            index
+            skill {
+                ...SkillFragment
+            }
+        }
+        newBarTwo {
+            id
+            index
+            skill {
+                ...SkillFragment
+            }
+        }
+        ultimateOne {
+            ...SkillFragment
+        }
+        ultimateTwo {
+            ...SkillFragment
+        }
+        smallPieceSelection {
+            ...SetSelectionFragment
+        }
+        bigPieceSelection {
+            ...SetSelectionFragment
+        }
+        jewelrySelection {
+            ...SetSelectionFragment
+        }
+        frontbarSelection {
+            ...SetSelectionFragment
+        }
+        backbarSelection {
+            ...SetSelectionFragment
+        }
+        mundusStone {
+            id
+            name
+            value
+            effect
+            icon
+        }
+        buff {
+            id
+            name
+            buffDescription
+            icon
+        }
+    }
+}
+
+fragment SkillSelectionFragment on SkillSelection {
+    id
+    index
+    skill {
+        ...SkillFragment
+    }
+}
+
+fragment SetSelectionFragment on SetSelection {
+    id
+    icon
+    slot
+    type
+    weaponType
+    selectedSet {
+        ...SetFragment
+    }
+    trait {
+        ...ModificationFragment
+    }
+    glyph {
+        ...ModificationFragment
+    }
+}
+
+fragment SkillFragment on Skill {
+    id
+    skillId
+    cast_time
+    cost
+    effect_1
+    effect_2
+    icon
+    name
+    parent
+    range
+    skillline
+    slug
+    target
+    type
+    unlocks_at
+}
+
+fragment SetFragment on Set {
+    id
+    setId
+    name
+    location
+    type
+    slug
+    bonus_item_1
+    bonus_item_2
+    bonus_item_3
+    bonus_item_4
+    bonus_item_5
+    has_jewels
+    has_weapons
+    has_heavy_armor
+    has_light_armor
+    has_medium_armor
+    traits_needed
+    eso_id
+}
+
+fragment ModificationFragment on Modification {
+    id
+    type
+    itemType
+    modificationType
+    description
+    icon
+}
