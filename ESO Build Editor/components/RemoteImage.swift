@@ -14,7 +14,14 @@ enum ImageTypes: String {
     case esoClass = "classes"
     case skill = "skills"
     case mundusStone = "mundusStones"
-    case armor = "armor"
+    case lightArmor = "gear/light"
+    case mediumArmor = "gear/medium"
+    case heavyArmor = "gear/heavy"
+    case jewelry = "gear/jewelry"
+    case onehanded = "gear/onehanded"
+    case twohanded = "gear/twohanded"
+    case perfected = "gear/weaponsets"
+    case monster = "gear/undaunted"
     case weapon = "weapons"
 }
 

@@ -136,6 +136,7 @@
 		31810BC823813CF50044AF31 /* Build */ = {
 			isa = PBXGroup;
 			children = (
+				31CC46BE237D901300A5B773 /* build.graphql */,
 				31CC46B8237D7A9D00A5B773 /* BuildDetail.swift */,
 				31446C16238057A2007BD401 /* SkillOverlay.swift */,
 				31810BC923813D2E0044AF31 /* SkillBar.swift */,
@@ -160,7 +161,6 @@
 			children = (
 				31810BC823813CF50044AF31 /* Build */,
 				31CBF44E237C4C7400B245B4 /* builds.graphql */,
-				31CC46BE237D901300A5B773 /* build.graphql */,
 				31CBF446237C4C2800B245B4 /* Builds.swift */,
 				31CBF450237C716200B245B4 /* BuildRow.swift */,
 			);

@@ -17,7 +17,11 @@ struct Build: View {
     @State private var frontBar: [SkillFragment] = []
     @State private var backBar: [SkillFragment] = []
     @State private var bigPieces: [SetSelectionFragment] = []
-
+    @State private var smallPieces: [SetSelectionFragment] = []
+    @State private var jewelryPieces: [SetSelectionFragment] = []
+    @State private var frontbarPieces: [SetSelectionFragment] = []
+    @State private var backbarPieces: [SetSelectionFragment] = []
+    
     var body: some View {
         ScrollView {
             
@@ -33,22 +37,45 @@ struct Build: View {
                 IconDescription(imageName: self.build.buff?.icon, imageType: .buff, text: self.build.buff?.name, description: self.build.buff?.buffDescription)
                 Divider()
             }
-
+            
             SkillBar(skills: self.frontBar, ultimate:  self.build.ultimateOne?.fragments.skillFragment ?? defaultSkill, barName: "Ability Bar 1")
             SkillBar(skills: self.backBar, ultimate:  self.build.ultimateTwo?.fragments.skillFragment ?? defaultSkill, barName: "Ability Bar 2")
             
-            Divider()
-            SetList(setSelections: self.bigPieces)
-
+            Group {
+                Divider()
+                SetList(setSelections: self.bigPieces, name: "Big Pieces")
+                Divider()
+                SetList(setSelections: self.smallPieces, name: "Small Pieces")
+                Divider()
+                SetList(setSelections: self.jewelryPieces, name: "Jewelry Pieces")
+                Divider()
+                SetList(setSelections: self.frontbarPieces, name: "Frontbar Pieces")
+                Divider()
+                SetList(setSelections: self.backbarPieces, name: "Backbar Pieces")
+            }
+            
         }.navigationBarTitle("\(build.name ?? "")").onAppear {
             self.frontBar = self.build.newBarOne?.map { $0.skill!.fragments.skillFragment
-            } ?? []
+                } ?? []
             self.backBar = self.build.newBarTwo?.map { $0.skill!.fragments.skillFragment
-            } ?? []
+                } ?? []
             self.bigPieces = self.build.bigPieceSelection?.map {
                 $0.fragments.setSelectionFragment
-            } ?? []
-
+                } ?? []
+            self.smallPieces = self.build.smallPieceSelection?.map {
+                $0.fragments.setSelectionFragment
+                } ?? []
+            self.jewelryPieces = self.build.jewelrySelection?.map {
+                $0.fragments.setSelectionFragment
+                } ?? []
+            self.frontbarPieces = self.build.frontbarSelection?.map {
+                $0.fragments.setSelectionFragment
+                } ?? []
+            self.backbarPieces = self.build.backbarSelection?.map {
+                $0.fragments.setSelectionFragment
+                } ?? []
+            
+            
             Logger.log(.warning, self.bigPieces)
         }
         
