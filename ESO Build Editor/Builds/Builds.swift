@@ -29,7 +29,7 @@ struct Builds: View {
     var body: some View {
         List(builds, id: \.id) { build in
             NavigationLink(destination: BuildDetail(buildId: build.id)) {
-                BuildRow(buildName: build.name ?? "", buildDesc: build.description ?? "")
+                BuildRow(buildName: build.name, buildDesc: build.description, race: build.race, esoClass: build.esoClass)
             }
         }.onAppear {
             self.fetch()

@@ -21,14 +21,16 @@ enum ImageTypes: String {
 struct RemoteImage: View {
     let IMAGE_SERVICE_URL="https://eso-build-image-service.fewhnhouse.de"
     
-
+    var width: CGFloat?
+    var height: CGFloat?
     
     @ObservedObject var imageLoader:ImageLoader
     @State var image:UIImage = UIImage()
     
-    init(name:String, type: ImageTypes ) {
-        Logger.log(.debug, type)
+    init(name:String, type: ImageTypes, width: CGFloat?, height: CGFloat? ) {
         imageLoader = ImageLoader(urlString:"\(IMAGE_SERVICE_URL)/\(type.rawValue)/\(name.contains(".png") ? name : "\(name).png")")
+        self.width = width
+        self.height = height
     }
 
     var body: some View {
@@ -37,7 +39,7 @@ struct RemoteImage: View {
                 .renderingMode(.original)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width:40, height:40)
+                .frame(width:width ?? 40, height: height ?? 40)
                 .cornerRadius(4.0)
         }.onReceive(imageLoader.didChange) { data in
             self.image = UIImage(data: data) ?? UIImage()
@@ -48,6 +50,6 @@ struct RemoteImage: View {
 
 struct RemoteImage_Previews: PreviewProvider {
     static var previews: some View {
-        RemoteImage(name: "orc", type: .race)
+        RemoteImage(name: "orc", type: .race, width: 40.0, height: 40.0)
     }
 }

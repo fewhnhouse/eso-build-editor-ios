@@ -14,38 +14,43 @@ let defaultBuild: BuildQuery.Data.Build = BuildQuery.Data.Build(id: "id", name: 
 struct Build: View {
     var build: BuildQuery.Data.Build
     @EnvironmentObject var settings: ModalSettings
+    @State private var frontBar: [SkillFragment] = []
+    @State private var backBar: [SkillFragment] = []
+    @State private var bigPieces: [SetSelectionFragment] = []
+
     var body: some View {
         ScrollView {
             
-
+            
             
             VStack(alignment: .leading) {
                 IconDescription(imageName: self.build.race, imageType: .race, text: self.build.race, description: "desc")
-                    Divider()
+                Divider()
                 IconDescription(imageName: self.build.esoClass, imageType: .esoClass, text: self.build.esoClass, description: "desc")
-                    Divider()
+                Divider()
                 IconDescription(imageName: self.build.mundusStone?.icon, imageType: .mundusStone, text: self.build.mundusStone?.name, description: "\(self.build.mundusStone?.effect ?? "") by \(self.build.mundusStone?.value ?? "")")
-                    Divider()
+                Divider()
                 IconDescription(imageName: self.build.buff?.icon, imageType: .buff, text: self.build.buff?.name, description: self.build.buff?.buffDescription)
-                    Divider()
+                Divider()
             }
-            HStack(alignment: .center) {
-                ForEach(self.build.newBarOne ?? [], id: \.id) { skillSelection in
-                    SkillButton(skill: skillSelection.skill?.fragments.skillFragment)
-                }
-                SkillButton(skill: self.build.ultimateOne?.fragments.skillFragment)
-            }
-            
-            HStack(alignment: .center) {
-                ForEach(self.build.newBarTwo ?? [], id: \.id) { skillSelection in
-                    SkillButton(skill: skillSelection.skill?.fragments.skillFragment)
-                }
-                SkillButton(skill: self.build.ultimateTwo?.fragments.skillFragment)
-            }
+
+            SkillBar(skills: self.frontBar, ultimate:  self.build.ultimateOne?.fragments.skillFragment ?? defaultSkill, barName: "Ability Bar 1")
+            SkillBar(skills: self.backBar, ultimate:  self.build.ultimateTwo?.fragments.skillFragment ?? defaultSkill, barName: "Ability Bar 2")
             
             Divider()
-            
-        }.navigationBarTitle("\(build.name ?? "")")
+            SetList(setSelections: self.bigPieces)
+
+        }.navigationBarTitle("\(build.name ?? "")").onAppear {
+            self.frontBar = self.build.newBarOne?.map { $0.skill!.fragments.skillFragment
+            } ?? []
+            self.backBar = self.build.newBarTwo?.map { $0.skill!.fragments.skillFragment
+            } ?? []
+            self.bigPieces = self.build.bigPieceSelection?.map {
+                $0.fragments.setSelectionFragment
+            } ?? []
+
+            Logger.log(.warning, self.bigPieces)
+        }
         
     }
 }
@@ -84,28 +89,7 @@ struct BuildDetail: View {
 }
 
 
-struct BuildDetail_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            BuildDetail(buildId: "String").environmentObject(ModalSettings())
-            Build(build: defaultBuild)
-        }
-        
-    }
-}
 
-struct SkillButton: View {
-    var skill: SkillFragment?
-    @EnvironmentObject var settings: ModalSettings
-    var body: some View {
-        Button(action: {
-            self.settings.modalVisible = true
-            self.settings.skill = self.skill
-        }) {
-            RemoteImage(name: skill?.icon ?? "", type: .skill)
-        }
-    }
-}
 
 struct IconDescription: View {
     var imageName: String?
@@ -114,11 +98,22 @@ struct IconDescription: View {
     var description: String?
     var body: some View {
         HStack {
-            RemoteImage(name: imageName ?? "", type: imageType)
+            RemoteImage(name: imageName ?? "", type: imageType, width: 40, height: 40)
             VStack(alignment: .leading) {
                 Text(text ?? "").font(.headline)
-                Text(description ?? "").font(.caption).foregroundColor(Color.gray)
+                Text(description ?? "").font(.footnote).foregroundColor(Color.gray)
             }.padding(.leading, 10)
         }.padding()
+    }
+}
+
+
+struct BuildDetail_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            BuildDetail(buildId: "String").environmentObject(ModalSettings())
+            Build(build: defaultBuild)
+        }
+        
     }
 }

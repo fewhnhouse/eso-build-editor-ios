@@ -9,15 +9,17 @@
 import SwiftUI
 
 struct BuildRow: View {
-    var buildName: String
-    var buildDesc: String
+    var buildName: String?
+    var buildDesc: String?
+    var race: String?
+    var esoClass: String?
     var body: some View {
         HStack(alignment: .center) {
-            Image(systemName: "person").resizable()
-                .frame(width: 40.0, height: 40.0).padding()
+            RemoteImage(name: race ?? "", type: .race, width: 40, height: 40)
+            RemoteImage(name: esoClass ?? "", type: .esoClass, width: 40, height: 40)
             VStack(alignment: .leading) {
-                Text(buildName).autocapitalization(.allCharacters).font(.headline)
-                Text(buildDesc).font(.footnote)
+                Text(buildName ?? "name").font(.headline)
+                Text(buildDesc ?? "description").font(.footnote).foregroundColor(Color.gray)
             }.padding()
             Spacer()
         }
@@ -26,6 +28,6 @@ struct BuildRow: View {
 
 struct BuildRow_Previews: PreviewProvider {
     static var previews: some View {
-        BuildRow(buildName: "Build Name", buildDesc: "Build Description")
+        BuildRow(buildName: "Build Name", buildDesc: "Build Description", race: "Orc", esoClass: "Templar")
     }
 }

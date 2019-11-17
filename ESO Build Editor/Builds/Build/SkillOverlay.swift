@@ -18,7 +18,7 @@ struct SkillOverlay: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack() {
-                RemoteImage(name: settings.skill?.icon ?? "", type: .skill)
+                RemoteImage(name: settings.skill?.icon ?? "", type: .skill, width: 40, height: 40)
                 VStack(alignment: .leading) {
                     Text(settings.skill?.name ?? "" ).font(.headline)
                     HStack {

@@ -8,12 +8,12 @@
 
 import SwiftUI
 
-
 struct ContentView: View {
     @State private var modalPresented: Bool = false
     @State private var longer: Bool = false
     @EnvironmentObject var settings: ModalSettings
-    
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
+
     var body: some View {
         NavigationView {
             TabView {
@@ -21,7 +21,7 @@ struct ContentView: View {
                     .tabItem {
                         Image(systemName: "1.square.fill")
                         Text("Builds")
-                }
+                }.navigationBarTitle("Builds")
                 Raids()
                     .tabItem {
                         Image(systemName: "2.square.fill")
@@ -39,21 +39,12 @@ struct ContentView: View {
                 }
             }
             .font(.headline)
-        }.partialSheet(presented: $settings.modalVisible) {
+        }.partialSheet(presented: $settings.modalVisible, backgroundColor: colorScheme == .light ? Color.white : Color.black) {
                 
                 SkillOverlay()
                 
 
-        }.gesture(DragGesture().onChanged { value in
-            Logger.log(.debug, "gesture")
-            if(value.translation.height < -100) {
-                self.settings.modalExtended = true
-            } else if(value.translation.height > 100) {
-                self.settings.modalExtended = false
-            }
-        }.onEnded { value in
-            
-        })
+        }
         
     }
 }
