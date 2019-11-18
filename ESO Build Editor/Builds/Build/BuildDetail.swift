@@ -10,6 +10,27 @@ import SwiftUI
 
 let defaultBuild: BuildQuery.Data.Build = BuildQuery.Data.Build(id: "id", name: "Test Build", applicationArea: "Cyrodiil: Raid", description: "My Description", role: "Healer", race: "Orc", esoClass: "Templar", published: true, accessRights: "private")
 
+func getDescription(forResource resource: String, title: String) -> String {
+    if let path = Bundle.main.url(forResource: resource, withExtension: "json") {
+        do {
+            let data = try Data(contentsOf: path)
+            let json = try JSONSerialization.jsonObject(with: data, options: [])
+            if let result = json as? Array<Dictionary<String, String>> {
+                Logger.log(.info, result)
+                for container in result {
+                    Logger.log(.info, container)
+                    if container["title"] == title {
+                        return container["description"] ?? ""
+                    }
+                }
+              }
+          } catch {
+            Logger.log(.error, "ERROR")
+               // handle error
+          }
+    }
+    return ""
+}
 
 struct Build: View {
     var build: BuildQuery.Data.Build
@@ -21,16 +42,17 @@ struct Build: View {
     @State private var jewelryPieces: [SetSelectionFragment] = []
     @State private var frontbarPieces: [SetSelectionFragment] = []
     @State private var backbarPieces: [SetSelectionFragment] = []
-    
+    @State private var raceDescription: String = ""
+    @State private var classDescription: String = ""
     var body: some View {
         ScrollView {
             
             
             
             VStack(alignment: .leading) {
-                IconDescription(imageName: self.build.race, imageType: .race, text: self.build.race, description: "desc")
+                IconDescription(imageName: self.build.race, imageType: .race, text: self.build.race, description: raceDescription)
                 Divider()
-                IconDescription(imageName: self.build.esoClass, imageType: .esoClass, text: self.build.esoClass, description: "desc")
+                IconDescription(imageName: self.build.esoClass, imageType: .esoClass, text: self.build.esoClass, description: classDescription)
                 Divider()
                 IconDescription(imageName: self.build.mundusStone?.icon, imageType: .mundusStone, text: self.build.mundusStone?.name, description: "\(self.build.mundusStone?.effect ?? "") by \(self.build.mundusStone?.value ?? "")")
                 Divider()
@@ -80,8 +102,9 @@ struct Build: View {
             if(self.backbarPieces[0].type == "TWO_HANDED") {
                 self.backbarPieces.removeLast()
             }
-            
-            Logger.log(.warning, self.bigPieces)
+            self.raceDescription = getDescription(forResource: "races", title: self.build.race ?? "")
+            self.classDescription = getDescription(forResource: "classes", title: self.build.esoClass ?? "")
+
         }
         
     }
