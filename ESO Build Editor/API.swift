@@ -3,6 +3,176 @@
 import Apollo
 import Foundation
 
+public final class BuildsQuery: GraphQLQuery {
+  /// The raw GraphQL definition of this operation.
+  public let operationDefinition =
+    """
+    query Builds {
+      builds {
+        __typename
+        id
+        name
+        applicationArea
+        description
+        role
+        race
+        esoClass
+        published
+        accessRights
+      }
+    }
+    """
+
+  public let operationName = "Builds"
+
+  public init() {
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Query"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("builds", type: .list(.nonNull(.object(Build.selections)))),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(builds: [Build]? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Query", "builds": builds.flatMap { (value: [Build]) -> [ResultMap] in value.map { (value: Build) -> ResultMap in value.resultMap } }])
+    }
+
+    public var builds: [Build]? {
+      get {
+        return (resultMap["builds"] as? [ResultMap]).flatMap { (value: [ResultMap]) -> [Build] in value.map { (value: ResultMap) -> Build in Build(unsafeResultMap: value) } }
+      }
+      set {
+        resultMap.updateValue(newValue.flatMap { (value: [Build]) -> [ResultMap] in value.map { (value: Build) -> ResultMap in value.resultMap } }, forKey: "builds")
+      }
+    }
+
+    public struct Build: GraphQLSelectionSet {
+      public static let possibleTypes = ["Build"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+        GraphQLField("name", type: .scalar(String.self)),
+        GraphQLField("applicationArea", type: .scalar(String.self)),
+        GraphQLField("description", type: .scalar(String.self)),
+        GraphQLField("role", type: .scalar(String.self)),
+        GraphQLField("race", type: .scalar(String.self)),
+        GraphQLField("esoClass", type: .scalar(String.self)),
+        GraphQLField("published", type: .nonNull(.scalar(Bool.self))),
+        GraphQLField("accessRights", type: .nonNull(.scalar(String.self))),
+      ]
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(id: GraphQLID, name: String? = nil, applicationArea: String? = nil, description: String? = nil, role: String? = nil, race: String? = nil, esoClass: String? = nil, published: Bool, accessRights: String) {
+        self.init(unsafeResultMap: ["__typename": "Build", "id": id, "name": name, "applicationArea": applicationArea, "description": description, "role": role, "race": race, "esoClass": esoClass, "published": published, "accessRights": accessRights])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var id: GraphQLID {
+        get {
+          return resultMap["id"]! as! GraphQLID
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "id")
+        }
+      }
+
+      public var name: String? {
+        get {
+          return resultMap["name"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "name")
+        }
+      }
+
+      public var applicationArea: String? {
+        get {
+          return resultMap["applicationArea"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "applicationArea")
+        }
+      }
+
+      public var description: String? {
+        get {
+          return resultMap["description"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "description")
+        }
+      }
+
+      public var role: String? {
+        get {
+          return resultMap["role"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "role")
+        }
+      }
+
+      public var race: String? {
+        get {
+          return resultMap["race"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "race")
+        }
+      }
+
+      public var esoClass: String? {
+        get {
+          return resultMap["esoClass"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "esoClass")
+        }
+      }
+
+      public var published: Bool {
+        get {
+          return resultMap["published"]! as! Bool
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "published")
+        }
+      }
+
+      public var accessRights: String {
+        get {
+          return resultMap["accessRights"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "accessRights")
+        }
+      }
+    }
+  }
+}
+
 public final class BuildQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition =
@@ -1071,176 +1241,6 @@ public final class BuildQuery: GraphQLQuery {
           set {
             resultMap.updateValue(newValue, forKey: "icon")
           }
-        }
-      }
-    }
-  }
-}
-
-public final class BuildsQuery: GraphQLQuery {
-  /// The raw GraphQL definition of this operation.
-  public let operationDefinition =
-    """
-    query Builds {
-      builds {
-        __typename
-        id
-        name
-        applicationArea
-        description
-        role
-        race
-        esoClass
-        published
-        accessRights
-      }
-    }
-    """
-
-  public let operationName = "Builds"
-
-  public init() {
-  }
-
-  public struct Data: GraphQLSelectionSet {
-    public static let possibleTypes = ["Query"]
-
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("builds", type: .list(.nonNull(.object(Build.selections)))),
-    ]
-
-    public private(set) var resultMap: ResultMap
-
-    public init(unsafeResultMap: ResultMap) {
-      self.resultMap = unsafeResultMap
-    }
-
-    public init(builds: [Build]? = nil) {
-      self.init(unsafeResultMap: ["__typename": "Query", "builds": builds.flatMap { (value: [Build]) -> [ResultMap] in value.map { (value: Build) -> ResultMap in value.resultMap } }])
-    }
-
-    public var builds: [Build]? {
-      get {
-        return (resultMap["builds"] as? [ResultMap]).flatMap { (value: [ResultMap]) -> [Build] in value.map { (value: ResultMap) -> Build in Build(unsafeResultMap: value) } }
-      }
-      set {
-        resultMap.updateValue(newValue.flatMap { (value: [Build]) -> [ResultMap] in value.map { (value: Build) -> ResultMap in value.resultMap } }, forKey: "builds")
-      }
-    }
-
-    public struct Build: GraphQLSelectionSet {
-      public static let possibleTypes = ["Build"]
-
-      public static let selections: [GraphQLSelection] = [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-        GraphQLField("name", type: .scalar(String.self)),
-        GraphQLField("applicationArea", type: .scalar(String.self)),
-        GraphQLField("description", type: .scalar(String.self)),
-        GraphQLField("role", type: .scalar(String.self)),
-        GraphQLField("race", type: .scalar(String.self)),
-        GraphQLField("esoClass", type: .scalar(String.self)),
-        GraphQLField("published", type: .nonNull(.scalar(Bool.self))),
-        GraphQLField("accessRights", type: .nonNull(.scalar(String.self))),
-      ]
-
-      public private(set) var resultMap: ResultMap
-
-      public init(unsafeResultMap: ResultMap) {
-        self.resultMap = unsafeResultMap
-      }
-
-      public init(id: GraphQLID, name: String? = nil, applicationArea: String? = nil, description: String? = nil, role: String? = nil, race: String? = nil, esoClass: String? = nil, published: Bool, accessRights: String) {
-        self.init(unsafeResultMap: ["__typename": "Build", "id": id, "name": name, "applicationArea": applicationArea, "description": description, "role": role, "race": race, "esoClass": esoClass, "published": published, "accessRights": accessRights])
-      }
-
-      public var __typename: String {
-        get {
-          return resultMap["__typename"]! as! String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "__typename")
-        }
-      }
-
-      public var id: GraphQLID {
-        get {
-          return resultMap["id"]! as! GraphQLID
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "id")
-        }
-      }
-
-      public var name: String? {
-        get {
-          return resultMap["name"] as? String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "name")
-        }
-      }
-
-      public var applicationArea: String? {
-        get {
-          return resultMap["applicationArea"] as? String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "applicationArea")
-        }
-      }
-
-      public var description: String? {
-        get {
-          return resultMap["description"] as? String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "description")
-        }
-      }
-
-      public var role: String? {
-        get {
-          return resultMap["role"] as? String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "role")
-        }
-      }
-
-      public var race: String? {
-        get {
-          return resultMap["race"] as? String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "race")
-        }
-      }
-
-      public var esoClass: String? {
-        get {
-          return resultMap["esoClass"] as? String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "esoClass")
-        }
-      }
-
-      public var published: Bool {
-        get {
-          return resultMap["published"]! as! Bool
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "published")
-        }
-      }
-
-      public var accessRights: String {
-        get {
-          return resultMap["accessRights"]! as! String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "accessRights")
         }
       }
     }
