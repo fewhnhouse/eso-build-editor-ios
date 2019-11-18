@@ -71,10 +71,15 @@ struct Build: View {
             self.frontbarPieces = self.build.frontbarSelection?.map {
                 $0.fragments.setSelectionFragment
                 } ?? []
+            if(self.frontbarPieces[0].type == "TWO_HANDED") {
+                self.frontbarPieces.removeLast()
+            }
             self.backbarPieces = self.build.backbarSelection?.map {
                 $0.fragments.setSelectionFragment
                 } ?? []
-            
+            if(self.backbarPieces[0].type == "TWO_HANDED") {
+                self.backbarPieces.removeLast()
+            }
             
             Logger.log(.warning, self.bigPieces)
         }

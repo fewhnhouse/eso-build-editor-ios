@@ -20,7 +20,7 @@ enum ImageTypes: String {
     case jewelry = "gear/jewelry"
     case onehanded = "gear/onehanded"
     case twohanded = "gear/twohanded"
-    case perfected = "gear/weaponsets"
+    case weaponSets = "gear/weaponSets"
     case monster = "gear/undaunted"
     case weapon = "weapons"
 }

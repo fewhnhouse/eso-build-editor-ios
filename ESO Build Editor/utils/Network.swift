@@ -48,7 +48,6 @@ extension Apollo: HTTPNetworkTransportPreflightDelegate {
     // Re-assign the updated headers to the request.
     request.allHTTPHeaderFields = headers
     
-    Logger.log(.debug, "Outgoing request: \(request)")
   }
 }
 
@@ -73,7 +72,6 @@ extension Apollo: HTTPNetworkTransportTaskCompletedDelegate {
     }
     
     if let data = data {
-      Logger.log(.debug, "Data: \(String(describing: String(bytes: data, encoding: .utf8)))")
     } else {
       Logger.log(.error, "No data received!")
     }
