@@ -13,10 +13,10 @@ struct ContentView: View {
     @State private var longer: Bool = false
     @EnvironmentObject var settings: ModalSettings
     @Environment(\.colorScheme) var colorScheme: ColorScheme
-
+    
     var body: some View {
-        NavigationView {
-            TabView {
+        TabView {
+            NavigationView {
                 Builds()
                     .tabItem {
                         Image(systemName: "1.square.fill")
@@ -40,10 +40,10 @@ struct ContentView: View {
             }
             .font(.headline)
         }.partialSheet(presented: $settings.modalVisible, backgroundColor: colorScheme == .light ? Color.white : Color.black) {
-                
-                SkillOverlay()
-                
-
+            
+            SkillOverlay()
+            
+            
         }
         
     }
