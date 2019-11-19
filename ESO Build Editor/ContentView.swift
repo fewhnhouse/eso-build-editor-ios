@@ -18,27 +18,30 @@ struct ContentView: View {
         TabView {
             NavigationView {
                 Builds()
-                    .tabItem {
-                        Image(systemName: "1.square.fill")
-                        Text("Builds")
-                }.navigationBarTitle("Builds")
-                Raids()
-                    .tabItem {
-                        Image(systemName: "2.square.fill")
-                        Text("Raids")
-                }
-                Login()
-                    .tabItem {
-                        Image(systemName: "3.square.fill")
-                        Text("Groups")
-                }
-                Me()
-                    .tabItem {
-                        Image(systemName: "3.square.fill")
-                        Text("Profile")
-                }
+                    .navigationBarTitle("Builds")
+            }.tabItem {
+                Image(systemName: "1.square.fill")
+                Text("Builds")
             }
-            .font(.headline)
+            NavigationView {
+                Raids()
+                .navigationBarTitle("Raids")
+            }.tabItem {
+                Image(systemName: "2.square.fill")
+                Text("Raids")
+            }
+            NavigationView {
+                Login()
+            }
+            .tabItem {
+                Image(systemName: "3.square.fill")
+                Text("Groups")
+            }
+            Me()
+                .tabItem {
+                    Image(systemName: "3.square.fill")
+                    Text("Profile")
+            }
         }.partialSheet(presented: $settings.modalVisible, backgroundColor: colorScheme == .light ? Color.white : Color.black) {
             
             SkillOverlay()
