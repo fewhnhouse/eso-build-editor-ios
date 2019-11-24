@@ -1,0 +1,20 @@
+
+query Raids {
+    raids {
+        id
+        name
+        description
+        applicationArea
+        published
+        accessRights
+        roles {
+            id
+            name
+        }
+        owner {
+            id
+            name
+        }
+
+    }
+}

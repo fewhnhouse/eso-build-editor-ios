@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import PartialSheet
 
 struct ContentView: View {
     @State private var modalPresented: Bool = false
@@ -43,10 +44,7 @@ struct ContentView: View {
                     Text("Profile")
             }
         }.partialSheet(presented: $settings.modalVisible, backgroundColor: colorScheme == .light ? Color.white : Color.black) {
-            
             SkillOverlay()
-            
-            
         }
         
     }

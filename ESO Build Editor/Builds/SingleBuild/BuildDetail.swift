@@ -16,9 +16,7 @@ func getDescription(forResource resource: String, title: String) -> String {
             let data = try Data(contentsOf: path)
             let json = try JSONSerialization.jsonObject(with: data, options: [])
             if let result = json as? Array<Dictionary<String, String>> {
-                Logger.log(.info, result)
                 for container in result {
-                    Logger.log(.info, container)
                     if container["title"] == title {
                         return container["description"] ?? ""
                     }

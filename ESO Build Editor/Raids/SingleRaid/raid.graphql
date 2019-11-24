@@ -1,0 +1,42 @@
+
+
+query Raid($id: ID!) {
+    raid(id: $id) {
+        id
+        name
+        description
+        applicationArea
+        published
+        accessRights
+        roles {
+            id
+            name
+            builds {
+                id
+                index
+                build {
+                    ...BuildFragment
+                }
+            }
+        }
+        owner {
+            id
+            name
+        }
+
+    }
+}
+
+
+fragment BuildFragment on Build {
+    id
+    name
+    applicationArea
+    description
+    role
+    race
+    esoClass
+    published
+    accessRights
+}
+

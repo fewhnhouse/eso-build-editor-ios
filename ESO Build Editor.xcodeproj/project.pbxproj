@@ -19,10 +19,15 @@
 		3162EC85237B5F3A00BBC6A1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3162EC84237B5F3A00BBC6A1 /* Preview Assets.xcassets */; };
 		3162EC88237B5F3A00BBC6A1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3162EC86237B5F3A00BBC6A1 /* LaunchScreen.storyboard */; };
 		3162EC90237BFE0900BBC6A1 /* Picker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3162EC8F237BFE0900BBC6A1 /* Picker.swift */; };
+		31637D92238378470019DD80 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31637D91238378470019DD80 /* SearchBar.swift */; };
 		317FC284237C3D7F0018903E /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 317FC283237C3D7F0018903E /* Apollo */; };
 		317FC286237C3DAA0018903E /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 317FC285237C3DAA0018903E /* schema.json */; };
 		317FC288237C3E8F0018903E /* me.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 317FC287237C3E8F0018903E /* me.graphql */; };
 		317FC28A237C3EC50018903E /* Me.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317FC289237C3EC50018903E /* Me.swift */; };
+		31A1B19323887B04008980F5 /* raids.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 31A1B19223887B04008980F5 /* raids.graphql */; };
+		31A1B197238AC8E1008980F5 /* RaidDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A1B196238AC8E1008980F5 /* RaidDetail.swift */; };
+		31A1B199238ACC63008980F5 /* RaidRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A1B198238ACC63008980F5 /* RaidRow.swift */; };
+		31A1B19C238ACFCB008980F5 /* raid.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 31A1B19B238ACFCB008980F5 /* raid.graphql */; };
 		31C7B2272382CAE700BD7D0E /* races.json in Resources */ = {isa = PBXBuildFile; fileRef = 31C7B2262382CAE700BD7D0E /* races.json */; };
 		31C7B2292382CB0200BD7D0E /* classes.json in Resources */ = {isa = PBXBuildFile; fileRef = 31C7B2282382CB0200BD7D0E /* classes.json */; };
 		31C7B2412382D28400BD7D0E /* SetList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C7B2402382D28400BD7D0E /* SetList.swift */; };
@@ -56,9 +61,14 @@
 		3162EC87237B5F3A00BBC6A1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3162EC89237B5F3A00BBC6A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3162EC8F237BFE0900BBC6A1 /* Picker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Picker.swift; sourceTree = "<group>"; };
+		31637D91238378470019DD80 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		317FC285237C3DAA0018903E /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		317FC287237C3E8F0018903E /* me.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = me.graphql; sourceTree = "<group>"; };
 		317FC289237C3EC50018903E /* Me.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Me.swift; sourceTree = "<group>"; };
+		31A1B19223887B04008980F5 /* raids.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = raids.graphql; sourceTree = "<group>"; };
+		31A1B196238AC8E1008980F5 /* RaidDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaidDetail.swift; sourceTree = "<group>"; };
+		31A1B198238ACC63008980F5 /* RaidRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaidRow.swift; sourceTree = "<group>"; };
+		31A1B19B238ACFCB008980F5 /* raid.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = raid.graphql; sourceTree = "<group>"; };
 		31C7B2262382CAE700BD7D0E /* races.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = races.json; sourceTree = "<group>"; };
 		31C7B2282382CB0200BD7D0E /* classes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = classes.json; sourceTree = "<group>"; };
 		31C7B2402382D28400BD7D0E /* SetList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetList.swift; sourceTree = "<group>"; };
@@ -151,6 +161,15 @@
 			path = SingleBuild;
 			sourceTree = "<group>";
 		};
+		31A1B19A238ACEAE008980F5 /* SingleRaid */ = {
+			isa = PBXGroup;
+			children = (
+				31A1B196238AC8E1008980F5 /* RaidDetail.swift */,
+				31A1B19B238ACFCB008980F5 /* raid.graphql */,
+			);
+			path = SingleRaid;
+			sourceTree = "<group>";
+		};
 		31CBF448237C4C2E00B245B4 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,7 +195,10 @@
 		31CBF44A237C4C3600B245B4 /* Raids */ = {
 			isa = PBXGroup;
 			children = (
+				31A1B19A238ACEAE008980F5 /* SingleRaid */,
+				31A1B19223887B04008980F5 /* raids.graphql */,
 				31446C1223803731007BD401 /* Raids.swift */,
+				31A1B198238ACC63008980F5 /* RaidRow.swift */,
 			);
 			path = Raids;
 			sourceTree = "<group>";
@@ -195,6 +217,7 @@
 				31CC46BC237D8C5900A5B773 /* RemoteImage.swift */,
 				3162EC8F237BFE0900BBC6A1 /* Picker.swift */,
 				3155ABA9237DA89E004935A3 /* ActivityIndicator.swift */,
+				31637D91238378470019DD80 /* SearchBar.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -278,6 +301,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				31C7B2292382CB0200BD7D0E /* classes.json in Resources */,
+				31A1B19C238ACFCB008980F5 /* raid.graphql in Resources */,
 				317FC286237C3DAA0018903E /* schema.json in Resources */,
 				317FC288237C3E8F0018903E /* me.graphql in Resources */,
 				31C7B2272382CAE700BD7D0E /* races.json in Resources */,
@@ -285,6 +309,7 @@
 				31CC46BF237D901300A5B773 /* build.graphql in Resources */,
 				31CBF43F237C442B00B245B4 /* login.graphql in Resources */,
 				3162EC85237B5F3A00BBC6A1 /* Preview Assets.xcassets in Resources */,
+				31A1B19323887B04008980F5 /* raids.graphql in Resources */,
 				3162EC82237B5F3A00BBC6A1 /* Assets.xcassets in Resources */,
 				31CBF44F237C4C7400B245B4 /* builds.graphql in Resources */,
 			);
@@ -319,6 +344,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				31CC46B9237D7A9D00A5B773 /* BuildDetail.swift in Sources */,
+				31A1B197238AC8E1008980F5 /* RaidDetail.swift in Sources */,
 				3162EC7C237B5F3400BBC6A1 /* AppDelegate.swift in Sources */,
 				31446C1523804EB7007BD401 /* ModalObservable.swift in Sources */,
 				31CBF451237C716200B245B4 /* BuildRow.swift in Sources */,
@@ -327,11 +353,13 @@
 				31CC46BD237D8C5900A5B773 /* RemoteImage.swift in Sources */,
 				3162EC90237BFE0900BBC6A1 /* Picker.swift in Sources */,
 				3162EC7E237B5F3400BBC6A1 /* SceneDelegate.swift in Sources */,
+				31637D92238378470019DD80 /* SearchBar.swift in Sources */,
 				317FC28A237C3EC50018903E /* Me.swift in Sources */,
 				31CBF447237C4C2800B245B4 /* Builds.swift in Sources */,
 				31CBF43B237C418F00B245B4 /* API.swift in Sources */,
 				31CBF445237C48A100B245B4 /* Logger.swift in Sources */,
 				31C7B2412382D28400BD7D0E /* SetList.swift in Sources */,
+				31A1B199238ACC63008980F5 /* RaidRow.swift in Sources */,
 				31CBF443237C474100B245B4 /* Network.swift in Sources */,
 				31CBF43D237C43BA00B245B4 /* Form.swift in Sources */,
 				3155ABAA237DA89E004935A3 /* ActivityIndicator.swift in Sources */,

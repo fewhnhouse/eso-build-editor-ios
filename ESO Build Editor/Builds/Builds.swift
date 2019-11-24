@@ -34,7 +34,6 @@ struct Builds: View {
         }.onAppear {
             self.fetch()
         }
-        .navigationBarTitle("Builds")
     }
 }
 
