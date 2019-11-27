@@ -12,6 +12,7 @@ struct SkillBar: View {
     var skills: [SkillFragment]
     let ultimate: SkillFragment
     let barName: String
+    let interactable: Bool
     @State private var btnDisabled = false
     var body: some View {
         VStack(alignment: .leading) {
@@ -19,7 +20,7 @@ struct SkillBar: View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(alignment: .center) {
                 ForEach(skills, id: \.id) { skillFragment in
-                    SkillButton(skill: skillFragment, disabled: self.btnDisabled)
+                    SkillButton(skill: skillFragment, disabled: !self.interactable || self.btnDisabled)
                 }
                 SkillButton(skill: ultimate, disabled: btnDisabled)
             }.padding(.horizontal)
@@ -59,7 +60,7 @@ struct SkillButton: View {
 
 struct SkillBar_Previews: PreviewProvider {
     static var previews: some View {
-        SkillBar(skills: [], ultimate: defaultSkill, barName: "Bar")
+        SkillBar(skills: [], ultimate: defaultSkill, barName: "Bar", interactable: true)
     }
 }
 

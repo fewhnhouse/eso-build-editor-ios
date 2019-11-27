@@ -122,7 +122,6 @@
 			children = (
 				31CBF44D237C4C5D00B245B4 /* utils */,
 				31CBF44C237C4C5400B245B4 /* components */,
-				31CBF44B237C4C3A00B245B4 /* Groups */,
 				31CBF44A237C4C3600B245B4 /* Raids */,
 				31CBF449237C4C3200B245B4 /* Builds */,
 				31CBF448237C4C2E00B245B4 /* Login */,
@@ -201,13 +200,6 @@
 				31A1B198238ACC63008980F5 /* RaidRow.swift */,
 			);
 			path = Raids;
-			sourceTree = "<group>";
-		};
-		31CBF44B237C4C3A00B245B4 /* Groups */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Groups;
 			sourceTree = "<group>";
 		};
 		31CBF44C237C4C5400B245B4 /* components */ = {

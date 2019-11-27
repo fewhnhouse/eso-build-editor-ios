@@ -32,6 +32,7 @@ func getDescription(forResource resource: String, title: String) -> String {
 
 struct Build: View {
     var build: BuildQuery.Data.Build
+    var interactable: Bool = true
     @EnvironmentObject var settings: ModalSettings
     @State private var frontBar: [SkillFragment] = []
     @State private var backBar: [SkillFragment] = []
@@ -58,8 +59,8 @@ struct Build: View {
                 Divider()
             }
             
-            SkillBar(skills: self.frontBar, ultimate:  self.build.ultimateOne?.fragments.skillFragment ?? defaultSkill, barName: "Ability Bar 1")
-            SkillBar(skills: self.backBar, ultimate:  self.build.ultimateTwo?.fragments.skillFragment ?? defaultSkill, barName: "Ability Bar 2")
+            SkillBar(skills: self.frontBar, ultimate:  self.build.ultimateOne?.fragments.skillFragment ?? defaultSkill, barName: "Ability Bar 1", interactable: interactable)
+            SkillBar(skills: self.backBar, ultimate:  self.build.ultimateTwo?.fragments.skillFragment ?? defaultSkill, barName: "Ability Bar 2", interactable: interactable)
             
             Group {
                 Divider()
@@ -110,9 +111,9 @@ struct Build: View {
 
 struct BuildDetail: View {
     var buildId:String
+    var interactable:Bool?
     
-    
-    @State var build: BuildQuery.Data.Build?
+    @State private var build: BuildQuery.Data.Build?
     func fetch() {
         Apollo.shared.apollo.fetch(query: BuildQuery(id: buildId)) { result in
             
@@ -129,10 +130,12 @@ struct BuildDetail: View {
         
         VStack {
             if((build) != nil) {
-                Build(build: build!)
+                Build(build: build!, interactable: interactable ?? true)
             } else {
+                Spacer()
                 ActivityIndicator(isAnimating: .constant(true), style: .large)
                 Text("Loading...")
+                Spacer()
             }
         }.onAppear {
             self.fetch()

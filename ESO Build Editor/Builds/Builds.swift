@@ -28,7 +28,7 @@ struct Builds: View {
     
     var body: some View {
         List(builds, id: \.id) { build in
-            NavigationLink(destination: BuildDetail(buildId: build.id)) {
+            NavigationLink(destination: BuildDetail(buildId: build.id, interactable: true)) {
                 BuildRow(buildName: build.name, buildDesc: build.description, race: build.race, esoClass: build.esoClass)
             }
         }.onAppear {

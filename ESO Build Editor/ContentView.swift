@@ -43,7 +43,7 @@ struct ContentView: View {
                     Image(systemName: "3.square.fill")
                     Text("Profile")
             }
-        }.partialSheet(presented: $settings.modalVisible, backgroundColor: colorScheme == .light ? Color.white : Color.black) {
+        }.edgesIgnoringSafeArea(.top).partialSheet(presented: $settings.modalVisible, backgroundColor: colorScheme == .light ? Color.white : Color.black) {
             SkillOverlay()
         }
         
