@@ -50,7 +50,7 @@ struct Raid: View {
                 ForEach(0 ..< selectedViewStyles.count) { index in
                     Image(systemName: self.selectedViewStyles[index])
                 }
-            }.pickerStyle(SegmentedPickerStyle())
+            }.pickerStyle(SegmentedPickerStyle()).padding([.leading, .trailing])
             List {
                 ForEach(raid.roles ?? [], id: \.id) { role in
                     Section(header: Text(role.name ?? "")) {

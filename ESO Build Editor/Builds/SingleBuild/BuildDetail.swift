@@ -34,20 +34,39 @@ struct Build: View {
     var build: BuildQuery.Data.Build
     var interactable: Bool = true
     @EnvironmentObject var settings: ModalSettings
-    @State private var frontBar: [SkillFragment] = []
-    @State private var backBar: [SkillFragment] = []
-    @State private var bigPieces: [SetSelectionFragment] = []
-    @State private var smallPieces: [SetSelectionFragment] = []
-    @State private var jewelryPieces: [SetSelectionFragment] = []
-    @State private var frontbarPieces: [SetSelectionFragment] = []
-    @State private var backbarPieces: [SetSelectionFragment] = []
-    @State private var raceDescription: String = ""
-    @State private var classDescription: String = ""
+    
     var body: some View {
-        ScrollView {
-            
-            
-            
+        let frontBar = self.build.newBarOne?.map { $0.skill!.fragments.skillFragment
+            } ?? []
+        let backBar = self.build.newBarTwo?.map { $0.skill!.fragments.skillFragment
+            } ?? []
+        let bigPieces = self.build.bigPieceSelection?.map {
+            $0.fragments.setSelectionFragment
+            } ?? []
+        let smallPieces = self.build.smallPieceSelection?.map {
+            $0.fragments.setSelectionFragment
+            } ?? []
+        let jewelryPieces = self.build.jewelrySelection?.map {
+            $0.fragments.setSelectionFragment
+            } ?? []
+        var frontbarPieces = self.build.frontbarSelection?.map {
+            $0.fragments.setSelectionFragment
+            } ?? []
+        if(frontbarPieces[0].type == "TWO_HANDED") {
+            frontbarPieces.removeLast()
+        }
+        var backbarPieces = self.build.backbarSelection?.map {
+            $0.fragments.setSelectionFragment
+            } ?? []
+        if(backbarPieces[0].type == "TWO_HANDED") {
+            backbarPieces.removeLast()
+        }
+        let raceDescription = getDescription(forResource: "races", title: self.build.race ?? "")
+        
+        let classDescription = getDescription(forResource: "classes", title: self.build.esoClass ?? "")
+
+
+        return ScrollView {
             VStack(alignment: .leading) {
                 IconDescription(imageName: self.build.race, imageType: .race, text: self.build.race, description: raceDescription)
                 Divider()
@@ -59,53 +78,23 @@ struct Build: View {
                 Divider()
             }
             
-            SkillBar(skills: self.frontBar, ultimate:  self.build.ultimateOne?.fragments.skillFragment ?? defaultSkill, barName: "Ability Bar 1", interactable: interactable)
-            SkillBar(skills: self.backBar, ultimate:  self.build.ultimateTwo?.fragments.skillFragment ?? defaultSkill, barName: "Ability Bar 2", interactable: interactable)
+            SkillBar(skills: frontBar, ultimate:  self.build.ultimateOne?.fragments.skillFragment ?? defaultSkill, barName: "Ability Bar 1", interactable: interactable)
+            SkillBar(skills: backBar, ultimate:  self.build.ultimateTwo?.fragments.skillFragment ?? defaultSkill, barName: "Ability Bar 2", interactable: interactable)
             
             Group {
                 Divider()
-                SetList(setSelections: self.bigPieces, name: "Big Pieces")
+                SetList(setSelections: bigPieces, name: "Big Pieces")
                 Divider()
-                SetList(setSelections: self.smallPieces, name: "Small Pieces")
+                SetList(setSelections: smallPieces, name: "Small Pieces")
                 Divider()
-                SetList(setSelections: self.jewelryPieces, name: "Jewelry Pieces")
+                SetList(setSelections: jewelryPieces, name: "Jewelry Pieces")
                 Divider()
-                SetList(setSelections: self.frontbarPieces, name: "Frontbar Pieces")
+                SetList(setSelections: frontbarPieces, name: "Frontbar Pieces")
                 Divider()
-                SetList(setSelections: self.backbarPieces, name: "Backbar Pieces")
+                SetList(setSelections: backbarPieces, name: "Backbar Pieces")
             }
             
-        }.navigationBarTitle("\(build.name ?? "")").onAppear {
-            self.frontBar = self.build.newBarOne?.map { $0.skill!.fragments.skillFragment
-                } ?? []
-            self.backBar = self.build.newBarTwo?.map { $0.skill!.fragments.skillFragment
-                } ?? []
-            self.bigPieces = self.build.bigPieceSelection?.map {
-                $0.fragments.setSelectionFragment
-                } ?? []
-            self.smallPieces = self.build.smallPieceSelection?.map {
-                $0.fragments.setSelectionFragment
-                } ?? []
-            self.jewelryPieces = self.build.jewelrySelection?.map {
-                $0.fragments.setSelectionFragment
-                } ?? []
-            self.frontbarPieces = self.build.frontbarSelection?.map {
-                $0.fragments.setSelectionFragment
-                } ?? []
-            if(self.frontbarPieces[0].type == "TWO_HANDED") {
-                self.frontbarPieces.removeLast()
-            }
-            self.backbarPieces = self.build.backbarSelection?.map {
-                $0.fragments.setSelectionFragment
-                } ?? []
-            if(self.backbarPieces[0].type == "TWO_HANDED") {
-                self.backbarPieces.removeLast()
-            }
-            self.raceDescription = getDescription(forResource: "races", title: self.build.race ?? "")
-            self.classDescription = getDescription(forResource: "classes", title: self.build.esoClass ?? "")
-
-        }
-        
+        }.navigationBarTitle("\(build.name ?? "")")
     }
 }
 
